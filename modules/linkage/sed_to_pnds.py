@@ -1,6 +1,5 @@
 import pandas as pd
 import pandas_dedupe
-import matplotlib.pyplot as plt
 
 from modules.linkage.project_functions import standardize_licnum, low_confidence
 

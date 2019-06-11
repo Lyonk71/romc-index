@@ -6,19 +6,28 @@ import pandas_npi
 
 
 def deduplicate_pnds():
-    # df = pd.read_csv('intermediate_datasets/provider_subset.csv', dtype=str)
+    df = pd.read_csv("intermediate_datasets/provider_subset.csv", dtype=str)
 
-    # ### Finds PNDS duplicates
+    ### Finds PNDS duplicates
 
-    # dfq = pandas_dedupe.dedupe_dataframe(df, [('fein', 'Exact'), 'Address1_std',
-    #                                          ('City_std', 'Exact'), ('Zip_std', 'Exact'),
-    #                                          ('latlong', 'LatLong')], config_name='dedupe_settings/deduplicate_pnds' , canonicalize=True)
+    dfq = pandas_dedupe.dedupe_dataframe(
+        df,
+        [
+            ("fein", "Exact"),
+            "Address1_std",
+            ("City_std", "Exact"),
+            ("Zip_std", "Exact"),
+            ("latlong", "LatLong"),
+        ],
+        config_name="dedupe_settings/deduplicate_pnds",
+        canonicalize=True,
+    )
 
     import pickle
 
-    # pickle.dump( dfq, open( "pickles/deduplicate_pnds_pickle_1.p", "wb" ) )
+    pickle.dump(dfq, open("pickles/deduplicate_pnds_pickle_1.p", "wb"))
 
-    dfq = pickle.load(open("pickles/deduplicate_pnds_pickle_1.p", "rb"))
+    # dfq = pickle.load(open("pickles/deduplicate_pnds_pickle_1.p", "rb"))
 
     drop_fields = [
         "fein - canonical",
@@ -51,6 +60,7 @@ def deduplicate_pnds():
         "facility_nppes_name - canonical",
         "primspec - canonical",
         "secdspec - canonical",
+        "provider_designation",
     ]
 
     dfq = dfq.drop(columns=drop_fields, axis=1)

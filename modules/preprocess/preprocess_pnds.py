@@ -306,7 +306,21 @@ def preprocess_pnds():
 
     # ### Convert code values to integers
 
-    df["primspec"] = df["primspec"].apply(int)
+    df["primspec"] = df["primspec"].apply(float)
+    df["secdspec"] = df["secdspec"].apply(float)
+
+    # create provider designation
+    def provider_designation(primspec, secdspec, primary_care_list):
+        if primspec in primary_care_list:
+            return 1
+        elif secdspec in primary_care_list:
+            return 1
+        else:
+            return np.nan
+
+    df['provider_designation'] = df.apply(lambda x: provider_designation(x['primspec'], x['secdspec'], [60.0, 50.0, 776.0, 55.0, 56.0, 150.0, 58.0, 182.0, 620.0, 621.0]), axis=1)
+
+
     # df['primdesg'] = df['primdesg'].apply(int)
     df["gender"] = df["gender"].apply(int)
 
@@ -323,8 +337,9 @@ def preprocess_pnds():
     df = df.drop(columns=["pnds_name", "name_score"]).copy()
 
     # ### Use dictionaries to label various attribues
-
     df["primspec"] = df["primspec"].apply(lambda x: spec_dict.get(x, x))
+    df["secdspec"] = df["secdspec"].apply(lambda x: spec_dict.get(x, x))
+
     # df['primdesg'] = df['primdesg'].apply(lambda x: designation_dict.get(x,x))
     df["gender"] = df["gender"].apply(lambda x: gender_dict.get(x, x))
     df["lang1"] = df["lang1"].apply(lambda x: language_dict.get(x, x))

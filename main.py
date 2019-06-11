@@ -5,13 +5,16 @@ from modules.deduplication.deduplicate_pnds import deduplicate_pnds
 from modules.linkage.sed_to_pnds import sed_to_pnds
 
 # convert pnds to csv
-# pnds_to_csv()
-
+print('section 1')
+pnds_to_csv()
 # create a standardized pnds subset
-# preprocess_pnds()
-
-# cluster duplicates in preprocessed pnds
+print('section 2')
+preprocess_pnds()
+cluster duplicates in preprocessed pnds
+print('section 3')
 deduplicate_pnds()
-
 # merge sed age onto pnds
+print('section 4')
 sed_to_pnds()
+
+#
