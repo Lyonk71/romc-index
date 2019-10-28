@@ -60,7 +60,7 @@ def deduplicate_pnds():
         "facility_nppes_name - canonical",
         "primspec - canonical",
         "secdspec - canonical",
-        "provider_designation",
+        "provider_designation - canonical",
     ]
 
     dfq = dfq.drop(columns=drop_fields, axis=1)
