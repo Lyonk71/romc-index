@@ -87,4 +87,4 @@ def sed_to_pnds():
     # merge age onto original pcmh file
     df_pnds = df_pnds.merge(df_sed, how="left", on="licnum")
 
-    df_pnds.to_csv("intermediate_datasets/clustered_with_age.csv")
+    df_pnds.to_csv("output_datasets/clustered_with_age.csv")

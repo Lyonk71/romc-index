@@ -312,11 +312,11 @@ def preprocess_pnds():
     # create provider designation
     def provider_designation(primspec, secdspec, primary_care_list):
         if primspec in primary_care_list:
-            return 'primary care'
+            return 1
         elif secdspec in primary_care_list:
-            return 'primary care'
+            return 1
         else:
-            return 'specialist'
+            return np.nan
 
     df['provider_designation'] = df.apply(lambda x: provider_designation(x['primspec'], x['secdspec'], [60.0, 50.0, 776.0, 55.0, 56.0, 150.0, 58.0, 182.0, 620.0, 621.0]), axis=1)
 
